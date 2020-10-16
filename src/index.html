@@ -1,0 +1,31 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+  <title>Hello World!</title>
+</head>
+
+<body>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="scraping.js"></script>
+
+  <h1>初めてのElectron</h1>
+  We are using node <script>document.write(process.versions.node)</script>,
+  Chrome <script>document.write(process.versions.chrome)</script>,
+  and Electron <script>document.write(process.versions.electron)</script>.
+
+    <form id="scrapingForm">
+        <div class="form-group">
+            <label for="inputUrl1">商品URL 1</label>
+            <input type="url" class="form-control inputUrl" id="inputUrl1">
+        </div>
+        <div class="form-group">
+            <label for="inputUrl2">商品URL 2</label>
+            <input type="url" class="form-control inputUrl" id="inputUrl2">
+        </div>
+        <button type="submit" class="btn btn-primary" id="scrapingStartBtn">取り込み開始</button>
+    </form>
+</body>
+</html>

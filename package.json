@@ -1,0 +1,33 @@
+{
+  "name": "Ebay-NoStockItems-SalesManagement",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ./src",
+    "build-macOS": "electron-packager ./src FirstApp --platform=darwin --arch=x64 --overwrite",
+    "build-windows": "electron-packager ./src FirstApp --platform=win32 --arch=x64 --overwrite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MomoShiroshiro/Ebay-NoStockItems-SalesManagement.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/MomoShiroshiro/Ebay-NoStockItems-SalesManagement/issues"
+  },
+  "homepage": "https://github.com/MomoShiroshiro/Ebay-NoStockItems-SalesManagement#readme",
+  "devDependencies": {
+    "bootstrap": "^4.5.2",
+    "electron": "^10.1.3",
+    "electron-packager": "^15.1.0",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.4.0",
+    "log4js": "^6.3.0",
+    "popper.js": "^1.16.1"
+  },
+  "dependencies": {
+    "config": "^3.3.2",
+    "playwright": "^1.4.2"
+  }
+}

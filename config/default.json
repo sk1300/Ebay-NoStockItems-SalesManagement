@@ -1,0 +1,16 @@
+{
+    "playwright": {
+        "browserType": "chromium",
+        "isHeadless": false,
+        "defaultTimeout": 120000
+    },
+    "system": {
+        "loopCnt": 120,
+        "basicWaitTime": 60000
+    },
+    "orderSite":{
+        "yahooAction":{
+
+        }
+    }
+}

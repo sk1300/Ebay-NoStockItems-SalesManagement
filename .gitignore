@@ -105,3 +105,6 @@ dist
 
 # VScode work space
 .code-workspace
+
+# log file
+.log/
