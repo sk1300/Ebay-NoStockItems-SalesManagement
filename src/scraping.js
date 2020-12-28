@@ -38,7 +38,15 @@ const scrapingYahooAuction = async (urls) => {
             i++
             await page.goto(url)
             await page.screenshot({ path: i + `_画面表示.png` })
-            
+            let productInfo = await page.evaluate(() => {
+                let title = document.querySelector('.ProductTitle__text').textContent
+                let price = document.querySelector('.Price__value').textContent
+                price = price.match(/(\d|,)+?円/g)
+                let stock = document.querySelector('.ProductDetail__description').textContent
+                stock.replace("：", "")
+                return {title: title, price: price, stock: stock}
+            })
+            await logger.info(productInfo)
             // ページ遷移されたかを待つ
             // await page.waitForNavigation()
             
