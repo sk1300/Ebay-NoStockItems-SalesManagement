@@ -1,0 +1,22 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+  <title>ヤフオク一括取り込み画面</title>
+</head>
+<body>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="yahoo_auction_all_scraping.js"></script>
+ 
+    <h1>ヤフオク一括取り込み画面</h1>
+    <form id="scrapingForm">
+        <div class="form-group">
+            <label for="inputUrl">商品URL 1</label>
+            <input type="url" class="form-control inputUrl" id="inputUrl">
+        </div>
+        <button type="submit" class="btn btn-primary" id="scrapingStartBtn">取り込み開始</button>
+    </form>
+</body>
+</html>

@@ -6,7 +6,9 @@
     },
     "system": {
         "loopCnt": 120,
-        "basicWaitTime": 60000
+        "basicWaitTime": 60000,
+        "tempPath": "./temp",
+        "imagePath": "./temp/image"
     },
     "orderSite":{
         "yahooAction":{

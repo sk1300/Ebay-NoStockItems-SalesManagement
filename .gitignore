@@ -107,4 +107,7 @@ dist
 .code-workspace
 
 # log file
-.log/
+log/
+
+# temp file
+temp/
