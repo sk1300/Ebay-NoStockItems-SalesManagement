@@ -34,25 +34,61 @@ const main = async (url) => {
         logger.info("Scraping Start")
         await page.goto(url)
         await page.screenshot({ path:`${imagePath}/ヤフオク一覧_画面表示.png` })
-        let productUrls = await page.evaluate(() => {
-            let productElements = document.querySelectorAll('.Product__titleLink')
-            let productUrls = []
-            productElements.forEach(
-                function(element) {
-                    productUrls.push(element.href)
+        let productUrls = await page.evaluate(
+            getProductUrls
+        )
+        try {
+            isNextBtnEnable = true
+            while (isNextBtnEnable) {
+                // 次へボタンのdisableチェック
+                // const nextBtnDisable = await page.$$(".Pager__list--next .Pager__link--disable")
+                const nextBtnDisable = await page.$('.Pager__list--next .Pager__link--disable')
+                logger.info(`nextBtnDisable : ${nextBtnDisable}`)
+                if (nextBtnDisable) {
+                    isNextBtnEnable = false
                 }
-            )
-            return productUrls
-        })
+                await page.click('.Pager__list--next .Pager__link')
+                await page.waitForSelector('.Pager__list--next .Pager__link', { state: 'attached' });
+                let addProductUrls = await page.evaluate(
+                    getProductUrls
+                )
+                logger.info('@@@@@@@@@@@@@@@@@@@@@@@@')
+                logger.info(`${addProductUrls}`)
+                logger.info('@@@@@@@@@@@@@@@@@@@@@@@@')s
+                productUrls = productUrls.concat(addProductUrls);
+              }
+        } catch (e) {
+            logger.error(e)
+        } finally {
+        }
+        logger.info(productUrls)
+        logger.info(productUrls.length)
+        // document.querySelector('.Pager__list--next .Pager__link')
+        // let returnObj = await page.evaluate(() => {
+        //     returnObj = {}
+        //     let allProductCount = parseInt(document.querySelector(
+        //         'li.Tab__item.Tab__item--current .Tab__subText').textContent.split("件")[0])
+        //     logger.info(`allProductCount: ${allProductCount}`)
+        //     returnObj.allProductCount = allProductCount
+        //     let productElements = document.querySelectorAll('.Product__titleLink')
+        //     let productUrls = []
+        //     productElements.forEach(
+        //         function(element) {
+        //             productUrls.push(element.href)
+        //         }
+        //     )
+        //     returnObj.productUrls = productUrls
+        //     return returnObj
+        // })
 
         // 商品情報取得処理
-        let i = 0
-        for (const url of productUrls) {
-            i++
-            await page.goto(url)
-            await page.screenshot({ path:`${imagePath}/${i}_画面表示.png` })
-            await scraping.scrapingYahooAuctionPage(page)
-        }
+        // let i = 0
+        // for (const url of productUrls) {
+        //     i++
+        //     await page.goto(url)
+        //     await page.screenshot({ path:`${imagePath}/${i}_画面表示.png` })
+        //     await scraping.scrapingYahooAuctionPage(page)
+        // }
 
         // let i = 0
         // for (const url of urls) {
@@ -69,7 +105,6 @@ const main = async (url) => {
         //     })
         //     await logger.info(productInfo)
         // }
-        logger.info(productUrls)
         logger.info("Scraping End")
         await browser.close()
 
@@ -78,4 +113,15 @@ const main = async (url) => {
     } finally {
 
     }
+}
+
+const getProductUrls = () => {
+    let productUrls = []
+    let productElements = document.querySelectorAll('.Product__titleLink')
+    productElements.forEach(
+        function(element) {
+            productUrls.push(element.href)
+        }
+    )
+    return productUrls
 }
