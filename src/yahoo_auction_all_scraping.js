@@ -6,11 +6,14 @@ const Log4js = require("log4js");
 Log4js.configure("./src/log-config.json");
 const axios = require('axios');
 const fs = require('fs');
-const scraping = require('./scraping.js');
+// const scraping = require('./scraping.js');
+const scraping = require('./scraping_service.js');
+
 
 const logger = Log4js.getLogger("system");
 const errorLogger = Log4js.getLogger("error");
 const imagePath = conf.get("system.imagePath")
+const csvPath = conf.get("system.csvPath")
 
 global.URL = require('url').URL;
 
@@ -22,6 +25,26 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
     };
 });
+const main = async (url) => {
+    try {
+        logger.info("Scraping scrapingAllYahooAuction")
+        logger.info("Scraping Start")
+        // let args = [`'${url}'`, `'${csvPath}'`, `'${imagePath}'`, 1, 1000]
+        let args = [url, csvPath, imagePath, 1, 1000]
+        // "https://auctions.yahoo.co.jp/search/search?auccat=2084005573&tab_ex=commerce&ei=utf-8&aq=1&oq=python&exflg=1&p=python&x=0&y=0&sc_i=auc_sug_cat" "csv" "image" "1" "10"
+        
+        // 商品情報取得
+        await scraping.scraping(args)
+        
+        logger.info("Scraping End")
+
+    } catch (e) {
+        logger.error(e)
+    } finally {
+
+    }
+}
+/* 自作スクレイピング処理Ver
 const main = async (url) => {
     try {
         logger.info("Scraping scrapingAllYahooAuction")
@@ -79,3 +102,4 @@ const main = async (url) => {
 
     }
 }
+*/

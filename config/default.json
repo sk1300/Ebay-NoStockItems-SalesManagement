@@ -8,7 +8,9 @@
         "loopCnt": 120,
         "basicWaitTime": 60000,
         "tempPath": "./temp",
-        "imagePath": "./temp/image"
+        "imagePath": "./temp/image",
+        "csvPath": "./temp/csv",
+        "scrapingTool": "python/scrape_order_site.py"
     },
     "orderSite":{
         "yahooAction":{
